@@ -11,6 +11,21 @@
          hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]
 }
 
+.box {
+  background: #fff;
+  border: 1px solid #999;
+  float: left;
+  font-size: 24px;
+  font-weight: bold;
+  line-height: 34px;
+  height: 100px;
+  margin-right: -1px;
+  margin-top: -1px;
+  padding: 0;
+  text-align: center;
+  width: 100px;
+}
+
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -18,15 +33,18 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* @media (prefers-color-scheme: dark) {
+
+}
+*/
+.row:after {
+  clear: both;
+  content: '';
+  display: table;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
+  margin: 20px;
+  padding: 0;
   font-family: Arial, Helvetica, sans-serif;
-}
+} 
