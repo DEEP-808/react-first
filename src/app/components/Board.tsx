@@ -1,15 +1,10 @@
-'use client' 
-
 import Box from "./Box";
-import { useState } from "react";
 import Utils from "./utility";
 
-export default function Board(){
-    const [isNext,setIsNext] = useState(true);
-    const [boxes,setBoxes] = useState(Array(9).fill(null));
+export default function Board({isNext,currentBoard,onPlay}){
 
     let status;
-    const winner =  Utils.calculateWinner(boxes);
+    const winner =  Utils.calculateWinner(currentBoard);
     if(winner){
         status = "Winner : " + winner;
     } else{
@@ -18,15 +13,14 @@ export default function Board(){
 
     function handleBoxClick(i){
        
-        if(boxes[i] ||  Utils.calculateWinner(boxes))
+        if(currentBoard[i] ||  Utils.calculateWinner(currentBoard))
             return;
-        const newBoxes = boxes.slice();
+        const newBoxes = currentBoard.slice();
         if(isNext)
             newBoxes[i] = 'X';
         else    
             newBoxes[i] = 'O';
-        setIsNext(!isNext);
-        setBoxes(newBoxes);
+        onPlay(newBoxes);
     }
 
     return (
@@ -34,23 +28,24 @@ export default function Board(){
             <div className="player-ind">
                 <p>{status}</p>
             </div>
+            <br></br>
             <div className="board">
                 <div className="row">
-                    <Box value = {boxes[0]} onBoxClick={()=>handleBoxClick(0)}/>
-                    <Box value = {boxes[1]} onBoxClick={()=>handleBoxClick(1)}/>
-                    <Box value = {boxes[2]} onBoxClick={()=>handleBoxClick(2)}/>
+                    <Box value = {currentBoard[0]} onBoxClick={()=>handleBoxClick(0)}/>
+                    <Box value = {currentBoard[1]} onBoxClick={()=>handleBoxClick(1)}/>
+                    <Box value = {currentBoard[2]} onBoxClick={()=>handleBoxClick(2)}/>
 
                 </div>
                 <div className="row">
-                    <Box value = {boxes[3]} onBoxClick={()=>handleBoxClick(3)}/>
-                    <Box value = {boxes[4]} onBoxClick={()=>handleBoxClick(4)}/>
-                    <Box value = {boxes[5]} onBoxClick={()=>handleBoxClick(5)}/>
+                    <Box value = {currentBoard[3]} onBoxClick={()=>handleBoxClick(3)}/>
+                    <Box value = {currentBoard[4]} onBoxClick={()=>handleBoxClick(4)}/>
+                    <Box value = {currentBoard[5]} onBoxClick={()=>handleBoxClick(5)}/>
 
                 </div>
                 <div className="row">
-                    <Box value = {boxes[6]} onBoxClick={()=>handleBoxClick(6)}/>
-                    <Box value = {boxes[7]} onBoxClick={()=>handleBoxClick(7)}/>
-                    <Box value = {boxes[8]} onBoxClick={()=>handleBoxClick(8)}/>
+                    <Box value = {currentBoard[6]} onBoxClick={()=>handleBoxClick(6)}/>
+                    <Box value = {currentBoard[7]} onBoxClick={()=>handleBoxClick(7)}/>
+                    <Box value = {currentBoard[8]} onBoxClick={()=>handleBoxClick(8)}/>
                 </div>
                 
 
